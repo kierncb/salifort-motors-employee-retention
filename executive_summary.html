@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Salifort Motors: Employee Retention Analysis</title>
+<meta name="description" content="All 145 employees with 7 projects left. Turnover at Salifort Motors is driven by overwork, not underperformance.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0B0C;--fg:#F2F2EF;--dim:#8C8C8C;--line:#242424;--card:#131313;--accent:#5B8DFF;--warn:#FF7A59;--head:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html[data-theme="light"]{--bg:#FAFAF8;--fg:#151513;--dim:#6F6F6A;--line:#E4E4DF;--card:#FFFFFF;--accent:#3E6FEA;--warn:#E0502B}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);overflow-x:hidden}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px 80px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:13px;color:var(--dim);border-bottom:1px solid var(--line);margin-bottom:32px}
+.pill{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.pill button{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--dim)}
+.pill button svg{width:14px;height:14px}
+.pill button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.pill button:focus-visible{outline:2px solid var(--accent)}
+h1,h2,h3,.big{font-family:var(--head);letter-spacing:-.02em;line-height:1.15}
+h1{font-size:36px;margin-bottom:10px}
+h2{font-size:22px;margin:56px 0 6px}
+h3{font-size:15px;font-weight:600}
+.sub,.cap{font-size:13.5px;color:var(--dim);max-width:60ch}
+.cap{margin-top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:18px}
+.hero{margin-top:20px;padding:16px 22px}.hero .cap{margin-top:4px}
+.hero .row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:0}
+.big{font-size:52px;font-weight:700;color:var(--warn)}
+.grid{display:grid;grid-template-columns:repeat(29,1fr);gap:4px}
+.grid i{aspect-ratio:1;background:var(--warn);border-radius:3px;display:block}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:10px}.stats .card{margin-top:0;padding:14px 16px}
+.stat b{font-family:var(--head);font-size:26px;display:block;line-height:1.1}
+.stat span{font-size:12.5px;color:var(--dim)}
+.split{display:flex;height:10px;border-radius:999px;overflow:hidden;margin-top:8px;background:var(--line)}
+.split span{display:block;height:100%}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--dim);margin-top:6px;flex-wrap:wrap}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.chip{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px;font-size:13px}
+.chip b{font-size:22px;line-height:1;width:24px;text-align:center}
+.chip small{color:var(--dim);font-size:11.5px}.up{color:var(--warn)}.down{color:var(--fg)}.flat{color:var(--dim)}
+.metric{margin-top:16px}
+.metric .name{font-size:12px;color:var(--dim);margin-bottom:6px}
+.bar{display:grid;grid-template-columns:5.5rem 1fr 2.6rem;gap:12px;align-items:center;font-size:12px;margin-bottom:5px}
+.bar b{text-align:right;font-weight:600}
+.track{height:10px;background:var(--line);border-radius:999px;overflow:hidden}
+.track span{display:block;height:100%;border-radius:999px}
+.dots{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;margin-top:14px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--line)}
+.dots i.hit{background:var(--warn)}
+.dots i.miss{background:var(--warn);opacity:.3}
+.recs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}
+.rec{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;font-size:13.5px}
+.rec svg{width:26px;height:26px;color:var(--fg)}
+.steps{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.step{flex:1 1 200px;border-left:3px solid var(--dim);padding:4px 0 4px 12px;font-size:13.5px}
+.links{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.links a{padding:8px 16px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;font-size:13px}
+.links a.gh{background:var(--accent);border-color:var(--accent);color:#fff}
+@media(max-width:640px){h1{font-size:28px}.big{font-size:40px}.grid{grid-template-columns:repeat(16,1fr)}.wrap{padding:0 18px 70px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><span>Case study · Google Advanced Data Analytics capstone</span>
+<span class="pill" role="group" aria-label="Theme">
+<button data-t="light" aria-pressed="false" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2V4M12 20V22M4 12H2M22 12H20M19.07 4.93L17.66 6.34M6.34 17.66L4.93 19.07M19.07 19.07L17.66 17.66M6.34 6.34L4.93 4.93" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+<button data-t="dark" aria-pressed="true" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+</span></nav>
+
+<header>
+<h1>Salifort Motors: why employees leave</h1>
+<p class="sub">HR wanted to know why people quit and whether at-risk employees can be flagged early. The data points to overwork, not underperformance.</p>
+</header>
+
+<figure class="card hero" role="img" aria-label="100 percent of the 145 employees assigned 7 projects left the company.">
+<div class="row"><span class="big">100%</span><h3>of employees with 7 projects left</h3></div>
+<figcaption class="cap">All 145 employees assigned 7 projects left the company.</figcaption>
+</figure>
+
+<div class="stats">
+<div class="card stat"><b>11,991</b><span>employees in the dataset</span></div>
+<div class="card stat"><b>16.6%</b><span>left the company</span>
+<div class="split" role="img" aria-label="83.4 percent stayed, 16.6 percent left"><span style="width:83.4%;background:var(--accent)"></span><span style="width:16.6%;background:var(--warn)"></span></div>
+<div class="legend"><span><i class="dot" style="background:var(--accent)"></i>Stayed</span><span><i class="dot" style="background:var(--warn)"></i>Left</span></div></div>
+<div class="card stat"><b>0.67</b><span>average satisfaction of stayers</span></div>
+</div>
+
+<h2>What the data shows</h2>
+
+<div class="card">
+<h3>Long hours: more work, no more reward</h3>
+<div class="chips" role="group" aria-label="Effects of working 240 plus hours a month">
+<div class="chip"><b class="up">▲</b><span>Turnover<br><small>higher</small></span></div>
+<div class="chip"><b class="down">▼</b><span>Satisfaction<br><small>lower</small></span></div>
+<div class="chip"><b class="flat">=</b><span>Evaluation score<br><small>no change</small></span></div>
+<div class="chip"><b class="flat">=</b><span>Promotion odds<br><small>no change</small></span></div>
+</div>
+<p class="cap">Compared with other employees, those working 240+ hours a month sat near zero satisfaction. The extra hours barely moved evaluations or promotions.</p>
+</div>
+
+<div class="card">
+<h3>Tenure: the four-year wall</h3>
+<svg viewBox="0 0 640 130" width="100%" role="img" aria-label="Tenure timeline from year 2 to year 7 plus. Year 4 is a risk point. Year 6 and beyond rarely leave.">
+<line x1="40" y1="70" x2="600" y2="70" stroke="var(--line)" stroke-width="4" stroke-linecap="round"/>
+<rect x="470" y="50" width="130" height="40" rx="20" fill="var(--accent)" opacity=".22"/>
+<g font-family="Inter,sans-serif" font-size="12" fill="var(--dim)" text-anchor="middle">
+<circle cx="80" cy="70" r="7" fill="var(--dim)"/><text x="80" y="104">2 yrs</text>
+<circle cx="200" cy="70" r="7" fill="var(--dim)"/><text x="200" y="104">3 yrs</text>
+<circle cx="320" cy="70" r="13" fill="var(--warn)"/><text x="320" y="104" fill="var(--fg)" font-weight="600">4 yrs</text>
+<text x="320" y="28" fill="var(--warn)" font-weight="600">Low satisfaction, high exits</text>
+<circle cx="440" cy="70" r="7" fill="var(--dim)"/><text x="440" y="104">5 yrs</text>
+<circle cx="500" cy="70" r="7" fill="var(--accent)"/><circle cx="560" cy="70" r="7" fill="var(--accent)"/>
+<text x="535" y="104" fill="var(--accent)" font-weight="600">6+ yrs</text>
+<text x="535" y="28" fill="var(--accent)" font-weight="600">Rarely leave</text>
+</g></svg>
+<p class="cap">Schematic of the pattern, not exact rates. Stalled progression is a likely cause and still needs confirming.</p>
+</div>
+
+<h2>Can we predict who leaves?</h2>
+<p class="sub">A logistic regression model scored 82% accuracy, but 83% of employees stayed, so that number flatters it. Look at the leavers.</p>
+
+<div class="card">
+<h3>Model scores by group</h3>
+<div class="metric"><div class="name">Precision</div>
+<div class="bar"><span>Stayers</span><div class="track"><span style="width:86%;background:var(--accent)"></span></div><b>0.86</b></div>
+<div class="bar"><span>Leavers</span><div class="track"><span style="width:44%;background:var(--warn)"></span></div><b>0.44</b></div></div>
+<div class="metric"><div class="name">Recall</div>
+<div class="bar"><span>Stayers</span><div class="track"><span style="width:93%;background:var(--accent)"></span></div><b>0.93</b></div>
+<div class="bar"><span>Leavers</span><div class="track"><span style="width:26%;background:var(--warn)"></span></div><b>0.26</b></div></div>
+<div class="metric"><div class="name">F1</div>
+<div class="bar"><span>Stayers</span><div class="track"><span style="width:90%;background:var(--accent)"></span></div><b>0.90</b></div>
+<div class="bar"><span>Leavers</span><div class="track"><span style="width:33%;background:var(--warn)"></span></div><b>0.33</b></div></div>
+<p class="cap">Test set: 2,321 stayers and 471 leavers.</p>
+</div>
+
+<figure class="card" role="img" aria-label="Of every 100 employees who leave, the model catches 26 and misses 74.">
+<h3>Of every 100 people who leave, the model catches 26</h3>
+<div class="dots" id="dots"></div>
+<div class="legend"><span><i class="dot" style="background:var(--warn)"></i>Caught (26)</span><span><i class="dot" style="background:var(--warn);opacity:.3"></i>Missed (74)</span></div>
+<figcaption class="cap">A useful baseline, not yet reliable enough to act on. Recall on leavers is the number to improve.</figcaption>
+</figure>
+
+<h2>What HR can do</h2>
+<div class="recs">
+<div class="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="4" y="5" width="16" height="4" rx="1"/><rect x="4" y="11" width="16" height="4" rx="1"/><path d="M4 19h10"/></svg>Cap the number of projects per employee.</div>
+<div class="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V6M6 12l6-6 6 6"/></svg>Promote at four years, or find out why that group is unhappy.</div>
+<div class="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>Reward long hours, or stop requiring them.</div>
+<div class="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14v10H9l-4 4z"/></svg>Make overtime pay and time-off expectations explicit.</div>
+<div class="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M16 15c3 0 5 1.5 5 4"/></svg>Hold team and company-wide talks on work culture.</div>
+<div class="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Score evaluations on contribution, not just hours above 200 a month.</div>
+</div>
+
+<h2>Next steps</h2>
+<div class="steps">
+<div class="step">Raise recall on leavers: class weights, thresholds, tree-based models.</div>
+<div class="step">Interview people near four years before changing promotion policy.</div>
+<div class="step">Re-run after a project cap to see if turnover at 6–7 projects drops.</div>
+</div>
+
+<div class="links">
+<a class="gh" href="https://github.com/kierncb/salifort-motors-employee-retention">GitHub</a>
+<a href="https://kierncb.vercel.app/">Portfolio</a>
+</div>
+</div>
+<script>
+var d=document.getElementById('dots');for(var j=0;j<100;j++){var e=document.createElement('i');e.className=j<26?'hit':'miss';d.appendChild(e);}
+(function(){var r=document.documentElement,b=document.querySelectorAll('.pill button');
+function set(t){r.setAttribute('data-theme',t);b.forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.t===t));});}
+var s=null;try{s=localStorage.getItem('theme');}catch(e){}
+if(s==='light'||s==='dark')set(s);else if(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)set('light');
+b.forEach(function(x){x.addEventListener('click',function(){set(x.dataset.t);try{localStorage.setItem('theme',x.dataset.t);}catch(e){}});});})();
+</script>
+</body>
+</html>
