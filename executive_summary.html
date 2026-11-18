@@ -69,8 +69,9 @@ h3{font-size:15px;font-weight:600}
 <div class="wrap">
 <nav><span>Case study · Google Advanced Data Analytics capstone</span>
 <span class="pill" role="group" aria-label="Theme">
+<button data-t="auto" aria-pressed="true" aria-label="Automatic theme"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
 <button data-t="light" aria-pressed="false" aria-label="Light theme"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2V4M12 20V22M4 12H2M22 12H20M19.07 4.93L17.66 6.34M6.34 17.66L4.93 19.07M19.07 19.07L17.66 17.66M6.34 6.34L4.93 4.93" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-<button data-t="dark" aria-pressed="true" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+<button data-t="dark" aria-pressed="false" aria-label="Dark theme"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
 </span></nav>
 
 <header>
@@ -170,11 +171,14 @@ h3{font-size:15px;font-weight:600}
 </div>
 <script>
 var d=document.getElementById('dots');for(var j=0;j<100;j++){var e=document.createElement('i');e.className=j<26?'hit':'miss';d.appendChild(e);}
-(function(){var r=document.documentElement,b=document.querySelectorAll('.pill button');
-function set(t){r.setAttribute('data-theme',t);b.forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.t===t));});}
+(function(){var r=document.documentElement,b=document.querySelectorAll('[data-t]'),media=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null,selected='auto';
+function apply(){var resolved=selected==='auto'?(media&&media.matches?'light':'dark'):selected;r.setAttribute('data-theme',resolved);b.forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.t===selected));});}
 var s=null;try{s=localStorage.getItem('theme');}catch(e){}
-if(s==='light'||s==='dark')set(s);else if(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)set('light');
-b.forEach(function(x){x.addEventListener('click',function(){set(x.dataset.t);try{localStorage.setItem('theme',x.dataset.t);}catch(e){}});});})();
+selected=(s==='light'||s==='dark'||s==='auto')?s:'auto';
+apply();
+b.forEach(function(x){x.addEventListener('click',function(){selected=x.dataset.t;apply();try{localStorage.setItem('theme',selected);}catch(e){}});});
+if(media){var changed=function(){if(selected==='auto')apply();};if(media.addEventListener)media.addEventListener('change',changed);else media.addListener(changed);}
+})();
 </script>
 </body>
 </html>
